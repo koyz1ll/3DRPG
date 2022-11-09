@@ -8,9 +8,10 @@ using UnityEngine.AI;
 public class EnemyCharacters : MonoBehaviour
 {
     private NavMeshAgent agent;
-    [SerializeField]
     private EnemyStatus enemyStatus;
 
+    [Header("Basic Settings")] 
+    public float sightRadius;
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -23,6 +24,11 @@ public class EnemyCharacters : MonoBehaviour
 
     private void SwtichStatus()
     {
+        if (FindPlayer())
+        {
+            enemyStatus = EnemyStatus.CHASE;
+            Debug.Log("找到player了");
+        }
         switch (enemyStatus)
         {
             case EnemyStatus.GUARD:
@@ -34,6 +40,19 @@ public class EnemyCharacters : MonoBehaviour
             case EnemyStatus.DEAD:
                 break;
         }
+    }
+
+    bool FindPlayer()
+    {
+        var colliders = Physics.OverlapSphere(transform.position, sightRadius);
+        foreach (var target in colliders)
+        {
+            if (target.gameObject.layer.Equals(LayerUtils.Player))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
 
