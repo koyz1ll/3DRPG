@@ -70,4 +70,16 @@ public class PlayerController : MonoBehaviour
          lastAttackTime = 1;
       }
    }
+   
+   private void OnDrawGizmosSelected()
+   {
+      Gizmos.color = Color.yellow;
+      if (agent && agent.path.corners.Length > 1)
+      {
+         for (var i = 0; i < agent.path.corners.Length - 1; i++)
+         {
+            Gizmos.DrawLine(agent.path.corners[i], agent.path.corners[i+1]);
+         }
+      }
+   }
 }
