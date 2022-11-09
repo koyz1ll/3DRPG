@@ -10,7 +10,8 @@ using Random = UnityEngine.Random;
 public class EnemyCharacters : MonoBehaviour
 {
     private NavMeshAgent agent;
-    private EnemyStatus enemyStatus;
+    [HideInInspector]
+    public EnemyStatus enemyStatus;
     private Animator anim;
 
     private CharacterStats characterStats;
@@ -27,6 +28,7 @@ public class EnemyCharacters : MonoBehaviour
     private bool isWalk;
     private bool isChase;
     private bool isFollow;
+    private bool isDead;
 
     [Header("Patrol State")] 
     public float patrolRange;
@@ -61,6 +63,10 @@ public class EnemyCharacters : MonoBehaviour
 
     private void Update()
     {
+        if (characterStats.CurrentHealth == 0)
+        {
+            isDead = true;
+        }
         SwitchStatus();
         SwitchAnimations();
         lastAttackTime -= Time.deltaTime;
@@ -72,11 +78,16 @@ public class EnemyCharacters : MonoBehaviour
         anim.SetBool("Chase", isChase);
         anim.SetBool("Follow", isFollow);
         anim.SetBool("Critical", characterStats.isCritical);
+        anim.SetBool("Death", isDead);
     }
 
     private void SwitchStatus()
     {
-        if (FindPlayer())
+        if (isDead)
+        {
+            enemyStatus = EnemyStatus.DEAD;
+        }
+        else if (FindPlayer())
         {
             enemyStatus = EnemyStatus.CHASE;
         }
@@ -155,6 +166,8 @@ public class EnemyCharacters : MonoBehaviour
                 }
                 break;
             case EnemyStatus.DEAD:
+                agent.enabled = false;
+                Destroy(gameObject, 2f);
                 break;
         }
     }

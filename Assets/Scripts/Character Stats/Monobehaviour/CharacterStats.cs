@@ -43,7 +43,10 @@ public class CharacterStats : MonoBehaviour
     {
         int damage = Math.Max(0, attacker.CurrentDamage() - defener.CurrentDefence);
         CurrentHealth = Math.Max(0, CurrentHealth - damage);
-        
+        if (isCritical)
+        {
+            defener.GetComponent<Animator>().SetTrigger("Hit");
+        }
         //TODO:Update UI
         //TODO:经验update
     }

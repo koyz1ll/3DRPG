@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
    private GameObject attackTarget;
    private CharacterStats characterStats;
    private float lastAttackTime;
+   private bool isDead;
 
    private void Awake()
    {
@@ -29,14 +30,15 @@ public class PlayerController : MonoBehaviour
 
    private void Update()
    {
+      isDead = characterStats.CurrentHealth == 0;
       SwitchAnimation();
-
       lastAttackTime -= Time.deltaTime;
    }
 
    private void SwitchAnimation()
    {
       anim.SetFloat("Speed", agent.velocity.sqrMagnitude);
+      anim.SetBool("Death", isDead);
    }
 
    void MoveToTarget(Vector3 target)
@@ -48,7 +50,7 @@ public class PlayerController : MonoBehaviour
 
    void EventAttack(GameObject target)
    {
-      if (target != null)
+      if (target != null && target.GetComponent<EnemyCharacters>().enemyStatus != EnemyStatus.DEAD)
       {
          attackTarget = target;
          characterStats.isCritical = Random.value < characterStats.attackData.criticalChance;
