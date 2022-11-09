@@ -77,7 +77,6 @@ public class EnemyCharacters : MonoBehaviour
         if (FindPlayer())
         {
             enemyStatus = EnemyStatus.CHASE;
-            Debug.Log("找到player了");
         }
 
         switch (enemyStatus)
@@ -227,6 +226,15 @@ public class EnemyCharacters : MonoBehaviour
             {
                 Gizmos.DrawLine(agent.path.corners[i], agent.path.corners[i+1]);
             }
+        }
+    }
+    
+    void Hit()
+    {
+        if (attackTarget != null)
+        {
+            var targetStats = attackTarget.GetComponent<CharacterStats>();
+            targetStats.TakeDamage(characterStats, targetStats);    
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
 {
@@ -50,6 +51,7 @@ public class PlayerController : MonoBehaviour
       if (target != null)
       {
          attackTarget = target;
+         characterStats.isCritical = Random.value < characterStats.attackData.criticalChance;
          StartCoroutine(MoveToAttackTarget());
       }
    }
@@ -67,8 +69,9 @@ public class PlayerController : MonoBehaviour
       agent.isStopped = true;
       if (lastAttackTime < 0)
       {
+         anim.SetBool("Critical", characterStats.isCritical);
          anim.SetTrigger("Attack");
-         lastAttackTime = 1;
+         lastAttackTime = characterStats.attackData.cooldown;
       }
    }
    
@@ -82,5 +85,12 @@ public class PlayerController : MonoBehaviour
             Gizmos.DrawLine(agent.path.corners[i], agent.path.corners[i+1]);
          }
       }
+   }
+   
+   //Animation Event
+   void Hit()
+   {
+      var targetStats = attackTarget.GetComponent<CharacterStats>();
+      targetStats.TakeDamage(characterStats, targetStats);
    }
 }

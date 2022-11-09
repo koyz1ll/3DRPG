@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class CharacterStats : MonoBehaviour
 {
@@ -34,5 +36,28 @@ public class CharacterStats : MonoBehaviour
         get { if (characterData != null) return characterData.currentDefence;else return 0; }
         set { characterData.currentDefence = value; }
     }
+    #endregion
+
+    #region Character Combat
+    public void TakeDamage(CharacterStats attacker, CharacterStats defener)
+    {
+        int damage = Math.Max(0, attacker.CurrentDamage() - defener.CurrentDefence);
+        CurrentHealth = Math.Max(0, CurrentHealth - damage);
+        
+        //TODO:Update UI
+        //TODO:经验update
+    }
+
+    private int CurrentDamage()
+    {
+        float coreDamage = Random.Range(attackData.minDamage, attackData.maxDamage);
+        if (isCritical)
+        {
+            coreDamage *= attackData.criticalMultiplier;
+            Debug.Log("暴击！" + coreDamage);
+        }
+        return (int) coreDamage;
+    }
+
     #endregion
 }
