@@ -32,6 +32,7 @@ public class EnemyCharacters : MonoBehaviour
     public float patrolRange;
     private Vector3 wayPoint;
     private Vector3 originPoint;
+    private Quaternion originRotation;
     
     private void Awake()
     {
@@ -39,6 +40,7 @@ public class EnemyCharacters : MonoBehaviour
         anim = GetComponent<Animator>();
         speed = agent.speed;
         originPoint = transform.position;
+        originRotation = transform.rotation;
         lookAtTime = Random.Range(2, 4);
         remainLookAtTime = lookAtTime;
         characterStats = GetComponent<CharacterStats>();
@@ -82,6 +84,17 @@ public class EnemyCharacters : MonoBehaviour
         switch (enemyStatus)
         {
             case EnemyStatus.GUARD:
+                isChase = false;
+                if (transform.position != originPoint)
+                {
+                    isWalk = true;
+                    agent.destination = originPoint;
+                    if (Vector3.SqrMagnitude(originPoint - transform.position) <= agent.stoppingDistance)
+                    {
+                        isWalk = false;
+                        transform.rotation = Quaternion.Lerp(transform.rotation, originRotation, 0.01f);
+                    }
+                }
                 break;
             case EnemyStatus.PATROL:
                 isChase = false;
