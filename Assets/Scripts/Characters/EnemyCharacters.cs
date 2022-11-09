@@ -13,6 +13,8 @@ public class EnemyCharacters : MonoBehaviour
     private EnemyStatus enemyStatus;
     private Animator anim;
 
+    private CharacterStats characterStats;
+
     [Header("Basic Settings")] 
     public float sightRadius;
     private GameObject attackTarget;
@@ -20,6 +22,7 @@ public class EnemyCharacters : MonoBehaviour
     private float speed;
     private float lookAtTime;
     private float remainLookAtTime;
+    private float lastAttackTime;
 
     private bool isWalk;
     private bool isChase;
@@ -38,6 +41,7 @@ public class EnemyCharacters : MonoBehaviour
         originPoint = transform.position;
         lookAtTime = Random.Range(2, 4);
         remainLookAtTime = lookAtTime;
+        characterStats = GetComponent<CharacterStats>();
     }
 
     private void Start()
@@ -57,6 +61,7 @@ public class EnemyCharacters : MonoBehaviour
     {
         SwitchStatus();
         SwitchAnimations();
+        lastAttackTime -= Time.deltaTime;
     }
 
     void SwitchAnimations()
@@ -64,6 +69,7 @@ public class EnemyCharacters : MonoBehaviour
         anim.SetBool("Walk", isWalk);
         anim.SetBool("Chase", isChase);
         anim.SetBool("Follow", isFollow);
+        anim.SetBool("Critical", characterStats.isCritical);
     }
 
     private void SwitchStatus()
@@ -101,10 +107,6 @@ public class EnemyCharacters : MonoBehaviour
                 }
                 break;
             case EnemyStatus.CHASE:
-                //TODO:追player
-                //TODO:拉脱回到上一个状态
-                //TODO:在攻击范围内则攻击
-                //TODO:配合动画
                 isWalk = false;
                 isChase = true;
                 agent.speed = speed;
@@ -126,9 +128,37 @@ public class EnemyCharacters : MonoBehaviour
                     isFollow = true;
                     agent.destination = attackTarget.transform.position;
                 }
+                if (TargetInAttackRange() || TargetInSkillRange())
+                {
+                    isFollow = false;
+                    agent.destination = transform.position;
+                    if (lastAttackTime < 0)
+                    {
+                        lastAttackTime = characterStats.attackData.cooldown;
+                        //暴击判断
+                        characterStats.isCritical = Random.value < characterStats.attackData.criticalChance;
+                        //执行攻击
+                        Attack();
+                    }
+                }
                 break;
             case EnemyStatus.DEAD:
                 break;
+        }
+    }
+    
+    void Attack()
+    {
+        transform.LookAt(attackTarget.transform);
+        if (TargetInAttackRange())
+        {
+           //近身攻击动画   
+           anim.SetTrigger("Attack");
+        }
+
+        if (TargetInSkillRange())
+        {
+            anim.SetTrigger("Skill");
         }
     }
 
@@ -145,6 +175,32 @@ public class EnemyCharacters : MonoBehaviour
         }
         attackTarget = null;
         return false;
+    }
+
+    bool TargetInAttackRange()
+    {
+        if (attackTarget != null)
+        {
+            return Vector3.Distance(attackTarget.transform.position,
+                transform.position) <= characterStats.attackData.attackRange;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
+    bool TargetInSkillRange()
+    {
+        if (attackTarget != null)
+        {
+            return Vector3.Distance(attackTarget.transform.position,
+                transform.position) <= characterStats.attackData.skillRange;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     void GetNewWayPoint()

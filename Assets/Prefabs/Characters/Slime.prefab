@@ -427,6 +427,7 @@ GameObject:
   - component: {fileID: 5856408421521485108}
   - component: {fileID: 5856408421521485109}
   - component: {fileID: 5856408421521485110}
+  - component: {fileID: 1340408335}
   m_Layer: 7
   m_Name: Slime
   m_TagString: Untagged
@@ -461,7 +462,7 @@ Animator:
   m_GameObject: {fileID: 5856363839407910504}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 1f499d0eded7a4245b0c36149a43da4f, type: 3}
-  m_Controller: {fileID: 9100000, guid: fb53b4d3a4f06844c90da7297e9082de, type: 2}
+  m_Controller: {fileID: 9100000, guid: 365bca1f210c81b4fb9303e51ce01fe6, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -481,7 +482,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 2.5
+  m_Speed: 1.5
   m_Acceleration: 80
   avoidancePriority: 50
   m_AngularSpeed: 800
@@ -505,7 +506,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a261e1eb783d5f4b9f7b9a5ef9fc70f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyStatus: 0
+  sightRadius: 6
+  isGuard: 0
+  patrolRange: 6
 --- !u!65 &5856408421521485110
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -519,3 +522,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &1340408335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5856363839407910504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e71eee60574f7ff4cb3ac915120a85c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterData: {fileID: 11400000, guid: 977a7254e705ff04a95b9e5d5407d357, type: 2}
+  attackData: {fileID: 11400000, guid: 8fd852edad1b4a74b826616873c45776, type: 2}
+  isCritical: 0
