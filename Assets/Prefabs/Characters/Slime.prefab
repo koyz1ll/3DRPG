@@ -506,8 +506,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a261e1eb783d5f4b9f7b9a5ef9fc70f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyStatus: 0
   sightRadius: 6
-  isGuard: 0
+  isGuard: 1
   patrolRange: 6
 --- !u!65 &5856408421521485110
 BoxCollider:
@@ -534,6 +535,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e71eee60574f7ff4cb3ac915120a85c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tempCharacterData: {fileID: 11400000, guid: 977a7254e705ff04a95b9e5d5407d357, type: 2}
+  tempAttackData: {fileID: 11400000, guid: 8fd852edad1b4a74b826616873c45776, type: 2}
   characterData: {fileID: 11400000, guid: 977a7254e705ff04a95b9e5d5407d357, type: 2}
   attackData: {fileID: 11400000, guid: 8fd852edad1b4a74b826616873c45776, type: 2}
   isCritical: 0

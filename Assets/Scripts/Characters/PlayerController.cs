@@ -50,13 +50,15 @@ public class PlayerController : MonoBehaviour,IEndGameObserver
    void MoveToTarget(Vector3 target)
    {
       StopAllCoroutines();
+      if (isDead) return;
       agent.isStopped = false;
       agent.destination = target;
    }
 
    void EventAttack(GameObject target)
    {
-      if (target != null && target.GetComponent<EnemyCharacters>().enemyStatus != EnemyStatus.DEAD)
+      if (isDead) return;
+      if (target != null && target.GetComponent<EnemyController>().enemyStatus != EnemyStatus.DEAD)
       {
          attackTarget = target;
          characterStats.isCritical = Random.value < characterStats.attackData.criticalChance;

@@ -1,16 +1,35 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class CharacterStats : MonoBehaviour
 {
+    public CharacterData_SO tempCharacterData;
+    public AttackData_SO tempAttackData;
+    
+    [HideInInspector]
     public CharacterData_SO characterData;
+    [HideInInspector]
     public AttackData_SO attackData;
 
     [HideInInspector]
     public bool isCritical;
+
+    private void Awake()
+    {
+        if (tempCharacterData != null)
+        {
+            characterData = Instantiate(tempCharacterData);
+        }
+
+        if (tempAttackData != null)
+        {
+            attackData = Instantiate(tempAttackData);
+        }
+    }
 
     #region Read from Data_SO
     public int MaxHealth

@@ -1524,6 +1524,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e71eee60574f7ff4cb3ac915120a85c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tempCharacterData: {fileID: 11400000, guid: 73a760d825e18bc48a8d646ab21cc346, type: 2}
+  tempAttackData: {fileID: 11400000, guid: 8fd852edad1b4a74b826616873c45776, type: 2}
   characterData: {fileID: 11400000, guid: 73a760d825e18bc48a8d646ab21cc346, type: 2}
   attackData: {fileID: 11400000, guid: 888d18551a5626543838a381921f0ceb, type: 2}
   isCritical: 0
