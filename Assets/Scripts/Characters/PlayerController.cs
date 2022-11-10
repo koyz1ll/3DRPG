@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour,IEndGameObserver
 {
    private NavMeshAgent agent;
    private Animator anim;
@@ -33,6 +33,10 @@ public class PlayerController : MonoBehaviour
    private void Update()
    {
       isDead = characterStats.CurrentHealth == 0;
+      if (isDead)
+      {
+         GameManager.Instance.NotifyObserver();
+      }
       SwitchAnimation();
       lastAttackTime -= Time.deltaTime;
    }
@@ -96,5 +100,10 @@ public class PlayerController : MonoBehaviour
    {
       var targetStats = attackTarget.GetComponent<CharacterStats>();
       targetStats.TakeDamage(characterStats, targetStats);
+   }
+
+   public void EndNotify()
+   {
+      
    }
 }

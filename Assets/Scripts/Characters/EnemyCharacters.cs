@@ -7,7 +7,7 @@ using Utils;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class EnemyCharacters : MonoBehaviour
+public class EnemyCharacters : MonoBehaviour,IEndGameObserver
 {
     private NavMeshAgent agent;
     [HideInInspector]
@@ -29,6 +29,8 @@ public class EnemyCharacters : MonoBehaviour
     private bool isChase;
     private bool isFollow;
     private bool isDead;
+
+    private bool playerDead = false;
 
     [Header("Patrol State")] 
     public float patrolRange;
@@ -61,15 +63,29 @@ public class EnemyCharacters : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        GameManager.Instance.AddObserver(this);
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.RemoveObserver(this);
+    }
+
     private void Update()
     {
         if (characterStats.CurrentHealth == 0)
         {
             isDead = true;
         }
-        SwitchStatus();
-        SwitchAnimations();
-        lastAttackTime -= Time.deltaTime;
+
+        if (!playerDead)
+        {
+            SwitchStatus();
+            SwitchAnimations();
+            lastAttackTime -= Time.deltaTime;    
+        }
     }
 
     void SwitchAnimations()
@@ -262,6 +278,18 @@ public class EnemyCharacters : MonoBehaviour
             var targetStats = attackTarget.GetComponent<CharacterStats>();
             targetStats.TakeDamage(characterStats, targetStats);    
         }
+    }
+
+    public void EndNotify()
+    {
+        playerDead = true;
+        isChase = false;
+        isWalk = false;
+        attackTarget = null;
+        anim.SetBool("Win", true);
+        //获胜了
+        //停止所有移动
+        //停止agent
     }
 }
 
