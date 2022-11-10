@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour,IEndGameObserver
       MouseManager.Instance.OnMouseClicked += MoveToTarget;
       MouseManager.Instance.OnEnemyClicked += EventAttack;
       
-      GameManager.Instance.RegisterPlayer(characterStats);
+      
    }
 
    private void Update()
@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour,IEndGameObserver
       isDead = characterStats.CurrentHealth == 0;
       if (isDead)
       {
-         GameManager.Instance.NotifyObserver();
+         EventCenter.Instance.NotifyNormalEvent(EventType.PLAYER_DEAD);
       }
       SwitchAnimation();
       lastAttackTime -= Time.deltaTime;
@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour,IEndGameObserver
       targetStats.TakeDamage(characterStats, targetStats);
    }
 
-   public void EndNotify()
+   public void EndNotify(string eventId, object arg)
    {
       
    }

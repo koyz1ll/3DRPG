@@ -65,12 +65,13 @@ public class EnemyCharacters : MonoBehaviour,IEndGameObserver
 
     private void OnEnable()
     {
-        GameManager.Instance.AddObserver(this);
+        //GameManager.Instance.AddObserver(this);
+        EventCenter.Instance.SubscribeNormalEvent(EventType.PLAYER_DEAD, EndNotify);
     }
 
     private void OnDisable()
     {
-        GameManager.Instance.RemoveObserver(this);
+        EventCenter.Instance.UnSubscribeNormalEvent(EventType.PLAYER_DEAD, EndNotify);
     }
 
     private void Update()
@@ -280,7 +281,7 @@ public class EnemyCharacters : MonoBehaviour,IEndGameObserver
         }
     }
 
-    public void EndNotify()
+    public void EndNotify(string arg1, object arg2)
     {
         playerDead = true;
         isChase = false;

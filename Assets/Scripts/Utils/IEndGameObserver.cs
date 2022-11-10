@@ -1,4 +1,4 @@
 ﻿public interface IEndGameObserver
 {
-        void EndNotify();
+        void EndNotify(string eventId, object arg);
 }
