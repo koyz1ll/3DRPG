@@ -28,7 +28,7 @@ public class MouseManager : Singleton<MouseManager>
          {
             Cursor.SetCursor(target, new Vector2(16,16), CursorMode.Auto);
          }
-         else if (hitLayer == LayerUtils.Enemy)
+         else if (hitLayer == LayerUtils.Enemy || hitLayer == LayerUtils.Attackable)
          {
             Cursor.SetCursor(attack, new Vector2(16,16), CursorMode.Auto);
          }
@@ -45,7 +45,7 @@ public class MouseManager : Singleton<MouseManager>
             OnMouseClicked?.Invoke(hitInfo.point);
          }
 
-         if (hitInfo.collider.gameObject.layer.Equals(LayerUtils.Enemy))
+         if (hitInfo.collider.gameObject.layer.Equals(LayerUtils.Enemy) || hitInfo.collider.gameObject.layer.Equals(LayerUtils.Attackable))
          {
             OnEnemyClicked?.Invoke(hitInfo.collider.gameObject);
          }

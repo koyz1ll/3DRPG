@@ -41,7 +41,10 @@ public class Golem : EnemyController
     //Animation Event
     public void CreateRock()
     {
-        attackRock = Instantiate(rockPrefab, handPos.position, Quaternion.identity);
+        if (attackRock == null)
+        {
+            attackRock = Instantiate(rockPrefab, handPos.position, Quaternion.identity);    
+        }
     }
     
     

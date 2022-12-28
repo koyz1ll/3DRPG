@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour,IEndGameObserver
    void EventAttack(GameObject target)
    {
       if (isDead) return;
-      if (target != null && target.GetComponent<EnemyController>().enemyStatus != EnemyStatus.DEAD)
+      if (target != null)
       {
          attackTarget = target;
          characterStats.isCritical = Random.value < characterStats.attackData.criticalChance;
@@ -77,6 +77,7 @@ public class PlayerController : MonoBehaviour,IEndGameObserver
       
       
       transform.LookAt(attackTarget.transform);
+      Debug.Log("distance:" + Vector3.Distance(transform.position, attackTarget.transform.position));
       while (Vector3.Distance(transform.position, attackTarget.transform.position) > characterStats.attackData.attackRange)
       {
          agent.destination = attackTarget.transform.position;
@@ -107,8 +108,20 @@ public class PlayerController : MonoBehaviour,IEndGameObserver
    //Animation Event
    void Hit()
    {
-      var targetStats = attackTarget.GetComponent<CharacterStats>();
-      targetStats.TakeDamage(characterStats, targetStats);
+      if (attackTarget.layer.Equals(LayerUtils.Attackable))
+      {
+         if (attackTarget.GetComponent<Rock>() && attackTarget.GetComponent<Rock>().rockStates == Rock.RockStates.HitNothing)
+         {
+            attackTarget.GetComponent<Rock>().rockStates = Rock.RockStates.HitEnemey;
+            attackTarget.GetComponent<Rigidbody>().velocity = Vector3.one;
+            attackTarget.GetComponent<Rigidbody>().AddForce(transform.forward * 20, ForceMode.Impulse);
+         }
+      }
+      else
+      {
+         var targetStats = attackTarget.GetComponent<CharacterStats>();
+         targetStats.TakeDamage(characterStats, targetStats);   
+      }
    }
 
    public void EndNotify(string eventId, object arg)
