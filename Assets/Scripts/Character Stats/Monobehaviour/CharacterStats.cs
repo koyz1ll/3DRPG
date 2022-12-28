@@ -69,7 +69,10 @@ public class CharacterStats : MonoBehaviour
             defener.GetComponent<Animator>().SetTrigger("Hit");
         }
         UpdateHealthBarOnAttac?.Invoke(CurrentHealth, MaxHealth);
-        //TODO:经验update
+        if (CurrentHealth <= 0)
+        {
+            attacker.characterData.UpdateExp(characterData.killPoint);   
+        }
     }
 
     public void TakeDamage(int damage, CharacterStats defener)

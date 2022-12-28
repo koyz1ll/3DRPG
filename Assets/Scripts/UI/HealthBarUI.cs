@@ -1,4 +1,5 @@
 ﻿using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -61,7 +62,10 @@ public class HealthBarUI:MonoBehaviour
     {
         if (currentHealth <= 0)
         {
-            Destroy(UIBar.gameObject);
+            if (UIBar.gameObject != null)
+            {
+                Destroy(UIBar.gameObject);    
+            }
         }
         UIBar.gameObject.SetActive(true);
         timeLeft = visibleTime;

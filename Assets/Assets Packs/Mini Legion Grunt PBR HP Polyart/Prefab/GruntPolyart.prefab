@@ -139,7 +139,7 @@ MonoBehaviour:
   healthUIPrefab: {fileID: 4760059006679114477, guid: 7116a2deb2a621c47bc42450e2670fce, type: 3}
   barPoint: {fileID: 7561749147672849278}
   alwaysVisible: 0
-  visibleTime: 0
+  visibleTime: 3
 --- !u!65 &1104505955
 BoxCollider:
   m_ObjectHideFlags: 0
