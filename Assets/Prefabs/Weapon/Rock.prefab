@@ -98,8 +98,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff3f0c0a2be832d409cddcd5ec2c2036, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 15
+  force: 30
   target: {fileID: 0}
+  attacker: {fileID: 0}
 --- !u!54 &3466122953377869062
 Rigidbody:
   m_ObjectHideFlags: 0

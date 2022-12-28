@@ -1,6 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using System.Timers;
 using UnityEngine;
 
@@ -29,7 +27,13 @@ public class Rock : MonoBehaviour
         {
             target = FindObjectOfType<PlayerController>().gameObject;
         }
-        direction = (target.transform.position - attacker.transform.position + Vector3.up).normalized;
+        direction = (target.transform.position - transform.position + Vector3.up).normalized;
         rb.AddForce(direction * force, ForceMode.Impulse);
+        Timer.Register(3, DestroySelf);
+    }
+
+    private void DestroySelf(float f, object o)
+    {
+        GameObject.Destroy(gameObject);
     }
 }
