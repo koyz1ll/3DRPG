@@ -15,11 +15,11 @@ public class EnemyController : MonoBehaviour,IEndGameObserver
     public EnemyStatus enemyStatus;
     private Animator anim;
 
-    private CharacterStats characterStats;
+    protected CharacterStats characterStats;
 
     [Header("Basic Settings")] 
     public float sightRadius;
-    private GameObject attackTarget;
+    protected GameObject attackTarget;
     public bool isGuard;
     private float speed;
     private float lookAtTime;
@@ -74,7 +74,7 @@ public class EnemyController : MonoBehaviour,IEndGameObserver
         }
     }
 
-    private void Update()
+    protected void Update()
     {
         if (characterStats.CurrentHealth == 0)
         {
@@ -183,7 +183,8 @@ public class EnemyController : MonoBehaviour,IEndGameObserver
                 }
                 break;
             case EnemyStatus.DEAD:
-                agent.enabled = false;
+                //agent.enabled = false;
+                agent.radius = 0;
                 Destroy(gameObject, 2f);
                 break;
         }
@@ -274,7 +275,7 @@ public class EnemyController : MonoBehaviour,IEndGameObserver
     
     void Hit()
     {
-        if (attackTarget != null)
+        if (attackTarget != null && transform.IsFacingTarget(attackTarget.transform))
         {
             var targetStats = attackTarget.GetComponent<CharacterStats>();
             targetStats.TakeDamage(characterStats, targetStats);    
