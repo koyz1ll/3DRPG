@@ -849,6 +849,7 @@ GameObject:
   - component: {fileID: 5192703340754811586}
   - component: {fileID: 5192703340754811587}
   - component: {fileID: 5192703340754811584}
+  - component: {fileID: 846062184765813053}
   m_Layer: 7
   m_Name: TurtleShell
   m_TagString: Untagged
@@ -870,6 +871,7 @@ Transform:
   m_Children:
   - {fileID: 5188619409219045610}
   - {fileID: 5188280015936896880}
+  - {fileID: 7431417199887405649}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -961,6 +963,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &846062184765813053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5194540615225299430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb72343a732d4b4dafba2188949dc438, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthUIPrefab: {fileID: 4760059006679114477, guid: 7116a2deb2a621c47bc42450e2670fce, type: 3}
+  barPoint: {fileID: 7431417199887405649}
+  alwaysVisible: 0
+  visibleTime: 0
 --- !u!1 &5194561904866991956
 GameObject:
   m_ObjectHideFlags: 0
@@ -1199,4 +1217,35 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5188593687338854494}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8115617611408359931
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7431417199887405649}
+  m_Layer: 7
+  m_Name: HelathBar Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7431417199887405649
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8115617611408359931}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5188543272312650716}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -7,6 +7,8 @@ using Random = UnityEngine.Random;
 
 public class CharacterStats : MonoBehaviour
 {
+
+    public Action<int, int> UpdateHealthBarOnAttac;
     public CharacterData_SO tempCharacterData;
     public AttackData_SO tempAttackData;
     
@@ -66,7 +68,7 @@ public class CharacterStats : MonoBehaviour
         {
             defener.GetComponent<Animator>().SetTrigger("Hit");
         }
-        //TODO:Update UI
+        UpdateHealthBarOnAttac?.Invoke(CurrentHealth, MaxHealth);
         //TODO:经验update
     }
 
@@ -74,6 +76,7 @@ public class CharacterStats : MonoBehaviour
     {
         int currentDamage = Math.Max(0, damage - defener.CurrentDefence);
         CurrentHealth = Mathf.Max(CurrentHealth - currentDamage, 0);
+        UpdateHealthBarOnAttac?.Invoke(CurrentHealth, MaxHealth);
     }
 
     private int CurrentDamage()
