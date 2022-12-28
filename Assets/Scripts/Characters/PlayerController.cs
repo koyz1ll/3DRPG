@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour,IEndGameObserver
 
    private void Awake()
    {
-      
       agent = GetComponent<NavMeshAgent>();
       anim = GetComponent<Animator>();
       characterStats = GetComponent<CharacterStats>();
@@ -30,7 +29,7 @@ public class PlayerController : MonoBehaviour,IEndGameObserver
       MouseManager.Instance.OnMouseClicked += MoveToTarget;
       MouseManager.Instance.OnEnemyClicked += EventAttack;
       
-      
+      GameManager.Instance.RegisterPlayer(characterStats);
    }
 
    private void Update()
