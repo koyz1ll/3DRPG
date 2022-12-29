@@ -10,6 +10,11 @@ public class MouseManager : Singleton<MouseManager>
    public Action<GameObject> OnEnemyClicked;
    public Texture2D point, doorway, attack, target, arrow;
 
+   protected override void Awake()
+   {
+      base.Awake();
+   }
+
    void Update()
    {
       SetCursorTexture();
