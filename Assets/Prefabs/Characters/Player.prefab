@@ -1499,7 +1499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f20fdd0ecc4e704bb4e2693c8308af3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stopDistance: 0
+  stopDistance: 1
 --- !u!136 &3616216734236003253
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1527,7 +1527,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tempCharacterData: {fileID: 11400000, guid: 73a760d825e18bc48a8d646ab21cc346, type: 2}
-  tempAttackData: {fileID: 11400000, guid: 888d18551a5626543838a381921f0ceb, type: 2}
   characterData: {fileID: 11400000, guid: 73a760d825e18bc48a8d646ab21cc346, type: 2}
   attackData: {fileID: 11400000, guid: 888d18551a5626543838a381921f0ceb, type: 2}
   isCritical: 0

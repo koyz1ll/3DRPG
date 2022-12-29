@@ -10,11 +10,9 @@ public class CharacterStats : MonoBehaviour
 
     public Action<int, int> UpdateHealthBarOnAttac;
     public CharacterData_SO tempCharacterData;
-    public AttackData_SO tempAttackData;
-    
+
     [HideInInspector]
     public CharacterData_SO characterData;
-    [HideInInspector]
     public AttackData_SO attackData;
 
     [HideInInspector]
@@ -26,11 +24,7 @@ public class CharacterStats : MonoBehaviour
         {
             characterData = Instantiate(tempCharacterData);
         }
-
-        if (tempAttackData != null)
-        {
-            attackData = Instantiate(tempAttackData);
-        }
+        
     }
 
     #region Read from Data_SO

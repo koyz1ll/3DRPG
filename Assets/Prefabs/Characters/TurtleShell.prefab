@@ -930,9 +930,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tempCharacterData: {fileID: 11400000, guid: e9835495c6aa9594ebad4c2014afd2d9, type: 2}
-  tempAttackData: {fileID: 11400000, guid: ba5a607a4227b624aa946bbb69e75e6a, type: 2}
   characterData: {fileID: 0}
-  attackData: {fileID: 0}
+  attackData: {fileID: 11400000, guid: ba5a607a4227b624aa946bbb69e75e6a, type: 2}
   isCritical: 0
 --- !u!114 &5192703340754811587
 MonoBehaviour:

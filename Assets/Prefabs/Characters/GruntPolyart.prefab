@@ -696,9 +696,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tempCharacterData: {fileID: 11400000, guid: f931dedbe453d8747be7298a3d947d87, type: 2}
-  tempAttackData: {fileID: 11400000, guid: ca455460587074d46b222d7c499267e2, type: 2}
   characterData: {fileID: 0}
-  attackData: {fileID: 0}
+  attackData: {fileID: 11400000, guid: ca455460587074d46b222d7c499267e2, type: 2}
   isCritical: 0
 --- !u!114 &299786776350380784
 MonoBehaviour:
@@ -760,9 +759,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tempCharacterData: {fileID: 11400000, guid: f931dedbe453d8747be7298a3d947d87, type: 2}
-  tempAttackData: {fileID: 11400000, guid: ca455460587074d46b222d7c499267e2, type: 2}
   characterData: {fileID: 0}
-  attackData: {fileID: 0}
+  attackData: {fileID: 11400000, guid: ca455460587074d46b222d7c499267e2, type: 2}
   isCritical: 0
 --- !u!195 &299786776104450247
 NavMeshAgent:

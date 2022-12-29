@@ -787,9 +787,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tempCharacterData: {fileID: 11400000, guid: 917d2560f2cf1ef4884fb70b85fbbbb8, type: 2}
-  tempAttackData: {fileID: 11400000, guid: 95b338173afa320499a3d445139d61ed, type: 2}
   characterData: {fileID: 0}
-  attackData: {fileID: 0}
+  attackData: {fileID: 11400000, guid: 95b338173afa320499a3d445139d61ed, type: 2}
   isCritical: 0
 --- !u!195 &899590424642048176
 NavMeshAgent:
