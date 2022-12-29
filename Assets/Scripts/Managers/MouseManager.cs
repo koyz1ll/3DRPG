@@ -32,7 +32,10 @@ public class MouseManager : Singleton<MouseManager>
          {
             Cursor.SetCursor(attack, new Vector2(16,16), CursorMode.Auto);
          }
-         
+         else if (hitLayer == LayerUtils.Portal)
+         {
+            Cursor.SetCursor(doorway, new Vector2(16,16), CursorMode.Auto);
+         }
       }
    }
 
@@ -40,7 +43,7 @@ public class MouseManager : Singleton<MouseManager>
    {
       if (Input.GetMouseButtonDown(0) && hitInfo.collider != null)
       {
-         if (hitInfo.collider.gameObject.layer.Equals(LayerUtils.Ground))
+         if (hitInfo.collider.gameObject.layer.Equals(LayerUtils.Ground) || hitInfo.collider.gameObject.layer.Equals(LayerUtils.Portal))
          {
             OnMouseClicked?.Invoke(hitInfo.point);
          }

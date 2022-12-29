@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 9110033547110309053}
   - component: {fileID: 9110033547110309054}
   - component: {fileID: 2324933879574152736}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Portal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: 
   transitionType: 0
-  destinationTag: 0
+  destinationTag: 1
 --- !u!65 &2324933879574152736
 BoxCollider:
   m_ObjectHideFlags: 0
