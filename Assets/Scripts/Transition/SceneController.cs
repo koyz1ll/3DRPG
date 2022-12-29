@@ -8,6 +8,7 @@ public class SceneController : Singleton<SceneController>
     public GameObject playerPrefab;
     private GameObject player;
     private NavMeshAgent playerAgent;
+    public SceneFader sceneFaderPrefab;
     protected override void Awake()
     {
         base.Awake();
@@ -67,13 +68,16 @@ public class SceneController : Singleton<SceneController>
 
     IEnumerator LoadLevel(string name)
     {
+        SceneFader fade = Instantiate(sceneFaderPrefab);
         if (name != "")
         {
+            yield return StartCoroutine(fade.FadeOut(2.5f));
             yield return SceneManager.LoadSceneAsync(name);
             yield return player = Instantiate(playerPrefab, GameManager.Instance.GetEntrance().position,
                 GameManager.Instance.GetEntrance().rotation);
             //保存游戏
             SaveManager.Instance.SavePlayerData();
+            yield return StartCoroutine(fade.FadeIn(2.5f));
             yield break;
         }
 
