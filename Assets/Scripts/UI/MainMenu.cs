@@ -20,8 +20,7 @@ public class MainMenu : MonoBehaviour
         quitBtn = transform.GetChild(3).GetComponent<Button>();
         director = FindObjectOfType<PlayableDirector>();
         director.stopped += NewGame;
-
-        continueBtn.enabled = !SaveManager.Instance.SceneName.Equals("");
+        
         newGameBtn.onClick.AddListener(PlayTimeLine);
         continueBtn.onClick.AddListener(ContinueGame);
         quitBtn.onClick.AddListener(QuitGame);
