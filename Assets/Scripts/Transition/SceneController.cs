@@ -59,4 +59,37 @@ public class SceneController : Singleton<SceneController>
         }
         return null;
     }
+
+    public void TransitionToFirstLevel()
+    {
+        StartCoroutine(LoadLevel("SampleScene"));
+    }
+
+    IEnumerator LoadLevel(string name)
+    {
+        if (name != "")
+        {
+            yield return SceneManager.LoadSceneAsync(name);
+            yield return player = Instantiate(playerPrefab, GameManager.Instance.GetEntrance().position,
+                GameManager.Instance.GetEntrance().rotation);
+            //保存游戏
+            SaveManager.Instance.SavePlayerData();
+            yield break;
+        }
+
+    }
+
+    public void TransitionToLoadGame()
+    {
+        StartCoroutine(LoadLevel(SaveManager.Instance.SceneName));
+    }
+
+    public void TransitionToMain()
+    {
+        StartCoroutine(LoadMain());
+    }
+    IEnumerator LoadMain()
+    {
+        yield return SceneManager.LoadSceneAsync("MainScene");
+    }
 }

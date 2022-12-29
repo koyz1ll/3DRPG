@@ -26,17 +26,17 @@ public class PlayerController : MonoBehaviour,IEndGameObserver
 
    private void OnEnable()
    {
-     
-   }
-
-   private void Start()
-   {
       MouseManager.Instance.OnMouseClicked += MoveToTarget;
       MouseManager.Instance.OnEnemyClicked += EventAttack;
       GameManager.Instance.RegisterPlayer(characterStats);
    }
 
-   private void OnDestroy()
+   private void Start()
+   {
+      SaveManager.Instance.LoadPlayerData();
+   }
+
+   private void OnDisable()
    {
       MouseManager.Instance.OnMouseClicked -= MoveToTarget;
       MouseManager.Instance.OnEnemyClicked -= EventAttack;

@@ -1,9 +1,16 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
 
 public class SaveManager:Singleton<SaveManager>
 {
+    private string sceneName = "";
+
+    public string SceneName
+    {
+        get { return PlayerPrefs.GetString(sceneName); }
+    }
     protected override void Awake()
     {
         base.Awake();
@@ -18,6 +25,11 @@ public class SaveManager:Singleton<SaveManager>
         if (Input.GetKeyDown(KeyCode.L))
         {
             LoadPlayerData();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneController.Instance.TransitionToMain();
         }
     }
 
@@ -38,6 +50,7 @@ public class SaveManager:Singleton<SaveManager>
         var jsonData = JsonUtility.ToJson(data);
         PlayerPrefs.SetString(key, jsonData);
         
+        PlayerPrefs.SetString(sceneName, SceneManager.GetActiveScene().name);
         PlayerPrefs.Save();
     }
 
