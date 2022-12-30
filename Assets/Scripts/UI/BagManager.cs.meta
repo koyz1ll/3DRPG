@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: c549b8c8b56afcc4090f52342cf5ca18
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - bagCanvasPrefab: {fileID: 5195567106025541660, guid: 6244bda650429b042a63bfae9e792fea, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
